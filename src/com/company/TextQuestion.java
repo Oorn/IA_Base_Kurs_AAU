@@ -18,4 +18,10 @@ public class TextQuestion extends AbstractQuestion {
         //todo
         return null;
     }
+
+    @Override
+    String displayString() {
+        return question + "; correct answer: " + correctAnswer + "; user answer: " + currentAnswer;
+    }
+
 }

@@ -47,13 +47,21 @@ public class GUIManager {
         //detailsPress is offered TestResult selected by user, when Details button is pressed
         //cancelPress is called when Cancel button is pressed
         //cannot callback more than once
-        //todo
+        mainWindow.displayHighScores(results, detailsPress, cancelPress);
     }
     void displayTestResult(TestResult result, Runnable backPress) {
         //displays detailed breakdown of result
         //backPress is called when Back button is pressed
         //cannot callback more than once
-        //todo
+        mainWindow.displayTestResult(result, backPress);
+    }
+    <T> void displayAbstractQuestion(T question, Consumer<T> commitPress, Runnable cancelPress) {
+        //single point access to all display question functions
+        if (question instanceof TextQuestion)
+            displayTextQuestion((TextQuestion) question, (Consumer<TextQuestion>) commitPress, cancelPress);
+        else if (question instanceof MultiChoiceQuestion)
+            displayMultiChoiceQuestion((MultiChoiceQuestion) question, (Consumer<MultiChoiceQuestion>) commitPress, cancelPress);
+        else throw new ClassCastException("displayAbstractQuestion offered not supported object");
     }
     void close() {
         //closes the window

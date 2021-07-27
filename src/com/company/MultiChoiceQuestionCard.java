@@ -4,7 +4,7 @@ import javax.swing.*;
 import java.awt.*;
 
 public class MultiChoiceQuestionCard extends UpperPanelCard{
-    private JLabel questionText;
+    private JTextArea questionText;
     private JCheckBox[] checkBoxArray;
     private MultiChoiceQuestion state;
     private JPanel checkBoxContainer;
@@ -13,14 +13,15 @@ public class MultiChoiceQuestionCard extends UpperPanelCard{
         super(name, parent);
     }
     public void init() {
-        questionText = new JLabel("InitialText");
+        questionText = new JTextArea("Should never be seen");
+        prepareJText(questionText);
         checkBoxContainer = new JPanel();
         checkBoxArray = new JCheckBox[0];
 
         setLayout(new GridBagLayout());
         GridBagConstraints c = new GridBagConstraints();
         c.anchor = GridBagConstraints.CENTER;
-        c.fill = GridBagConstraints.NONE;
+        c.fill = GridBagConstraints.BOTH;
 
         c.gridx = 0;
         c.gridy = 0;
@@ -34,6 +35,8 @@ public class MultiChoiceQuestionCard extends UpperPanelCard{
         c.weighty = 0.5;
         add(checkBoxContainer ,c);
         checkBoxContainer.setVisible(true);
+
+        setVisible(true);
     }
 
     private void setCheckboxNumber (int num) {
