@@ -6,4 +6,6 @@ public abstract class AbstractQuestion {
     String question;
     abstract Boolean ValidateAnswer();
     TreeSet<String> tags;
+    abstract String displayString();
+
 }

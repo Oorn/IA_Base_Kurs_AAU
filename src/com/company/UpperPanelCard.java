@@ -11,4 +11,11 @@ public abstract class UpperPanelCard extends JPanel {
         this.parent = parent;
     }
     abstract public void init();
+    static protected void prepareJText(JTextArea a) {
+        a.setEditable(false);
+        a.setLineWrap(true);
+        a.setWrapStyleWord(true);
+        a.setVisible(true);
+    }
+
 }

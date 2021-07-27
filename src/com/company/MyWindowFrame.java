@@ -4,6 +4,9 @@ import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.lang.reflect.Constructor;
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.TreeSet;
 import java.util.function.Consumer;
 
@@ -17,15 +20,15 @@ public class MyWindowFrame extends JFrame {
     //TextQuestionCard inputNamePanel;
     TextQuestionCard textQuestionPanel;
     MultiChoiceQuestionCard multiChoiceQuestionPanel;
-    UpperPanelCard leaderBoardPanel; //todo
-    UpperPanelCard testResultPanel; //todo
+    LeaderBoardDisplayCard leaderBoardPanel;
+    ResultsDetailedCard testResultPanel;
 
     private static final String BANNER_CARD = "Banner Card";
     //private static final String INPUT_NAME_CARD = "Input Name Card";
     private static final String TEXT_QUESTION_CARD = "Text Question Card";
     private static final String MULTI_QUESTION_CARD = "Multi Question Card";
     private static final String LEADERBOARD_CARD = "Leaderboard Card";
-    private static final String TEST_RESULT_CARD = "Test Result Card";
+    private static final String RESULTS_DETAILED_CARD = "Test Result Card";
 
     boolean isBlocked;
     public MyWindowFrame() {}
@@ -105,9 +108,13 @@ public class MyWindowFrame extends JFrame {
         multiChoiceQuestionPanel.init();
         upperPanel.add(multiChoiceQuestionPanel, MULTI_QUESTION_CARD);
 
-        leaderBoardPanel = null;//todo
+        leaderBoardPanel = new LeaderBoardDisplayCard(LEADERBOARD_CARD, this);
+        leaderBoardPanel.init();
+        upperPanel.add(leaderBoardPanel, LEADERBOARD_CARD);
 
-        testResultPanel = null; //todo
+        testResultPanel = new ResultsDetailedCard(RESULTS_DETAILED_CARD, this);
+        testResultPanel.init();
+        upperPanel.add(testResultPanel, RESULTS_DETAILED_CARD);
     }
     private void displayCard(String Card) {
         ((CardLayout)(upperPanel.getLayout())).show(upperPanel, Card);
@@ -125,6 +132,8 @@ public class MyWindowFrame extends JFrame {
     }
     public void displayMainMenu(Runnable newGamePress, Runnable highScoresPress) {
         destroyButtonListeners();
+        okButton.setVisible(true);
+        cancelButton.setVisible(true);
         okButton.setText("High Scores");
         cancelButton.setText("New Game");
         displayCard(BANNER_CARD);
@@ -149,6 +158,8 @@ public class MyWindowFrame extends JFrame {
     }
     public void displayTextQuestion(TextQuestion question, Consumer<TextQuestion> commitPress, Runnable cancelPress) {
         destroyButtonListeners();
+        okButton.setVisible(true);
+        cancelButton.setVisible(true);
         okButton.setText("Ok");
         cancelButton.setText("Cancel");
 
@@ -175,6 +186,8 @@ public class MyWindowFrame extends JFrame {
     }
     public void displayMultiQuestion(MultiChoiceQuestion question, Consumer<MultiChoiceQuestion> commitPress, Runnable cancelPress) {
         destroyButtonListeners();
+        okButton.setVisible(true);
+        cancelButton.setVisible(true);
         okButton.setText("Ok");
         cancelButton.setText("Cancel");
 
@@ -199,19 +212,129 @@ public class MyWindowFrame extends JFrame {
 
         unblock();
     }
-    void displayHighScores(TestResult[] results, Consumer<TestResult> detailsPress, Runnable cancelPress) {
-        //todo
+    public void displayHighScores(TestResult[] results, Consumer<TestResult> detailsPress, Runnable cancelPress) {
+        destroyButtonListeners();
+        okButton.setVisible(true);
+        cancelButton.setVisible(true);
+        okButton.setText("Result Details");
+        cancelButton.setText("Cancel");
+
+        leaderBoardPanel.setState(results);
+        leaderBoardPanel.updateFromState();
+        displayCard(LEADERBOARD_CARD);
+
+        okButton.addActionListener((e) -> {
+            if (isBlocked)
+                return;
+            isBlocked = true;
+            TestResult res = leaderBoardPanel.getSelection();
+            if (res == null) {
+                isBlocked = false;
+                return;
+            }
+
+            detailsPress.accept(res);
+        });
+
+        cancelButton.addActionListener((e) -> {
+            if (isBlocked)
+                return;
+            isBlocked = true;
+            cancelPress.run();
+        });
+
+        unblock();
     }
     void displayTestResult(TestResult result, Runnable backPress) {
+        destroyButtonListeners();
+        okButton.setVisible(false);
+        cancelButton.setVisible(true);
+        cancelButton.setText("Ok");
 
-        //todo
+        testResultPanel.setState(result);
+        testResultPanel.updateFromState();
+        displayCard(RESULTS_DETAILED_CARD);
+
+        cancelButton.addActionListener((e) -> {
+            if (isBlocked)
+                return;
+            isBlocked = true;
+            backPress.run();
+        });
+        unblock();
     }
+
 
 
     public static void main(String[] args) {
         // testing of GUI
         GUIManager test = new GUIManager();
         test.initialize();
-        test.displayMainMenu(() -> test.displayInputName((s) -> test.displayTextQuestion(new TextQuestion(s, "", null), (tq) -> test.displayMultiChoiceQuestion(new MultiChoiceQuestion(tq.currentAnswer, new String[]{"Answer1", "Answer2"}, new TreeSet<>(), null), (mcq) -> test.close(), test::close), test::close), test::close), test::close);
+        //test.displayMainMenu(() -> test.displayInputName((s) -> test.displayTextQuestion(new TextQuestion(s, "", null), (tq) -> test.displayMultiChoiceQuestion(new MultiChoiceQuestion(tq.currentAnswer, new String[]{"Answer1", "Answer2"}, new TreeSet<>(), null), (mcq) -> test.close(), test::close), test::close), test::close), test::close);
+        TestResult[] testRes = new TestResult[7];
+        TestResult[] testRes2 = new TestResult[2];
+        testRes[0] = new TestResult("name1", 1, "comment1", null);
+        testRes[1] = new TestResult("name2", 2, "comment2", null);
+        testRes[2] = new TestResult("name3", 3, "comment3", null);
+        testRes[3] = new TestResult("name4", 4, "comment4", null);
+        testRes[4] = new TestResult("name5", 5, "comment5", null);
+        testRes[5] = new TestResult("name6", 6, "comment6", null);
+        testRes[6] = new TestResult("name7", 7, "comment7", null);
+
+        testRes2[0] = new TestResult("name1", 1, "comment1", null);
+        testRes2[1] = new TestResult("name2", 2, "comment2", null);
+
+        class testFunctionBase {
+            Runnable closeTest = test::close;
+            Consumer<TextQuestion> textQuestionOkTest;
+            Consumer<TestResult> highScoresOkTest;
+        }
+        testFunctionBase testBase = new testFunctionBase();
+
+        Runnable closeTest = test::close;
+        Consumer<TextQuestion> textQuestionOkTest;
+        testBase.highScoresOkTest = (tRes) -> test.displayTextQuestion(
+                        new TextQuestion(tRes.name, "", null),
+                        testBase.textQuestionOkTest,
+                        closeTest);
+        testBase.textQuestionOkTest = (tRes) -> test.displayHighScores(
+                testRes2,
+                testBase.highScoresOkTest,
+                closeTest);
+
+
+        test.displayHighScores(testRes, testBase.highScoresOkTest, closeTest);
+
+        AbstractQuestion[] testQuiz = new AbstractQuestion[7];
+        TextQuestion tq;
+        MultiChoiceQuestion mq;
+        tq = new TextQuestion("text question 1" , "correct answer 1", null);
+        tq.currentAnswer = "user answer 1";
+        testQuiz[0] = tq;
+        tq = new TextQuestion("text question 2" , "correct answer 2", null);
+        tq.currentAnswer = "user answer 2";
+        testQuiz[1] = tq;
+        tq = new TextQuestion("text question 3" , "correct answer 3", null);
+        tq.currentAnswer = "user answer 3";
+        testQuiz[2] = tq;
+        tq = new TextQuestion("text question 4" , "correct answer 4", null);
+        tq.currentAnswer = "user answer 4";
+        testQuiz[3] = tq;
+        tq = new TextQuestion("text question 5" , "correct answer 5", null);
+        tq.currentAnswer = "user answer 5";
+        testQuiz[4] = tq;
+
+        mq = new MultiChoiceQuestion("multi question 6", new String[] {"multi answer 1", "multi answer 2", "multi answer 3"}, new TreeSet<>(Arrays.asList(0,2)), null);
+        mq.currentAnswers = new TreeSet<>(Arrays.asList(0,1));
+        testQuiz[5] = mq;
+        mq = new MultiChoiceQuestion("multi question 7", new String[] {"multi answer 1", "multi answer 2", "multi answer 3"}, new TreeSet<>(Arrays.asList(1,2)), null);
+        mq.currentAnswers = new TreeSet<>(Arrays.asList(1,2));
+        testQuiz[6] = mq;
+
+        //test.displayTestResult(new TestResult("test name", 10, "test commentaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", testQuiz), testBase.closeTest);
+
+
+
+
     }
 }

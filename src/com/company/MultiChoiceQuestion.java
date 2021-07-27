@@ -20,4 +20,29 @@ public class MultiChoiceQuestion extends AbstractQuestion {
         //todo
         return null;
     }
+
+    @Override
+    String displayString() {
+        StringBuilder res = new StringBuilder(question);
+
+        res.append("; correct answers: ");
+        correctAnswers.forEach((i) -> {
+            res.append(offeredAnswers[i]);
+            res.append(", ");
+        });
+        if (correctAnswers.isEmpty())
+            res.append("none, ");
+        res.delete(res.length() - 2, res.length());
+
+        res.append("; user answers: ");
+        currentAnswers.forEach((i) -> {
+            res.append(offeredAnswers[i]);
+            res.append(", ");
+        });
+        if (currentAnswers.isEmpty())
+            res.append("none, ");
+        res.delete(res.length() - 2, res.length());
+
+        return res.toString();
+    }
 }
