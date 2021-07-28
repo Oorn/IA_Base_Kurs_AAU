@@ -1,10 +1,20 @@
 package com.company;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import netscape.javascript.JSObject;
 
+import java.util.Arrays;
 import java.util.TreeSet;
 
 public class MultiChoiceQuestion extends AbstractQuestion {
+    public MultiChoiceQuestion() {
+        question = "";
+        offeredAnswers = new String[0];
+        correctAnswers = new TreeSet<>();
+        tags = new TreeSet<>();
+        currentAnswers = new TreeSet<>();
+    }
     MultiChoiceQuestion(String question, String[] offeredAnswers, TreeSet<Integer> correctAnswers, TreeSet<String> tags){
         this.question = question;
         this.offeredAnswers = offeredAnswers;
@@ -13,15 +23,17 @@ public class MultiChoiceQuestion extends AbstractQuestion {
         currentAnswers = new TreeSet<>();
         //todo
     }
+    @JsonProperty
     String[] offeredAnswers;
+    @JsonProperty
     TreeSet<Integer> correctAnswers;
+    @JsonProperty
     TreeSet<Integer> currentAnswers;
 
 
     @Override
     Boolean ValidateAnswer() {
-        //todo
-        return null;
+        return currentAnswers.equals(correctAnswers);
     }
 
     @Override
@@ -51,16 +63,27 @@ public class MultiChoiceQuestion extends AbstractQuestion {
 
     @Override
     public String getQuestion() {
-        return null;
+        return question;
     }
 
-    @Override
-    public String[] getOfferedAnswers() {
-        return new String[0];
-    }
+    //@Override
+    //public String[] getOfferedAnswers() {
+    //    return new String[0];
+    //}
+
+    //@Override
+    //public void setCurrentAnswers(int nextInt) {
+//
+    //  }
 
     @Override
-    public void setCurrentAnswers(int nextInt) {
-
+    public String toString() {
+        return "MultiChoiceQuestion{" +
+                "question='" + question + '\'' +
+                ", tags=" + tags +
+                ", offeredAnswers=" + Arrays.toString(offeredAnswers) +
+                ", correctAnswers=" + correctAnswers +
+                ", currentAnswers=" + currentAnswers +
+                '}';
     }
 }

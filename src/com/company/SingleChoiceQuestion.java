@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class SingleChoiceQuestion extends AbstractQuestion {
 
-    String question;
+    //String question;
     String[] offeredAnswers;
     int correctAnswer;
     int currentAnswer;
@@ -15,13 +15,10 @@ public class SingleChoiceQuestion extends AbstractQuestion {
         this.correctAnswer = correctAnswer;
     }
 
-    public SingleChoiceQuestion () {}
 
 
     Boolean ValidateAnswer() {
-        if (this.currentAnswer == this.correctAnswer) {
-            return true;
-        } else return false;
+        return this.currentAnswer == this.correctAnswer;
     }
 
     String displayString() {
