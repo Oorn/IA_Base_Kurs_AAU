@@ -1,5 +1,7 @@
 package com.company;
 
+import netscape.javascript.JSObject;
+
 import java.util.TreeSet;
 
 public class MultiChoiceQuestion extends AbstractQuestion {
@@ -14,6 +16,7 @@ public class MultiChoiceQuestion extends AbstractQuestion {
     String[] offeredAnswers;
     TreeSet<Integer> correctAnswers;
     TreeSet<Integer> currentAnswers;
+
 
     @Override
     Boolean ValidateAnswer() {
@@ -44,5 +47,20 @@ public class MultiChoiceQuestion extends AbstractQuestion {
         res.delete(res.length() - 2, res.length());
 
         return res.toString();
+    }
+
+    @Override
+    public String getQuestion() {
+        return null;
+    }
+
+    @Override
+    public String[] getOfferedAnswers() {
+        return new String[0];
+    }
+
+    @Override
+    public void setCurrentAnswers(int nextInt) {
+
     }
 }

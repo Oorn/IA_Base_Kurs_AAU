@@ -10,8 +10,13 @@ public class TextQuestion extends AbstractQuestion {
         this.tags = tags;
         //todo
     }
+
+    public TextQuestion() {
+    }
+
     String correctAnswer;
     String currentAnswer;
+    String [] offeredAnswers;
 
     @Override
     Boolean ValidateAnswer() {
@@ -22,6 +27,21 @@ public class TextQuestion extends AbstractQuestion {
     @Override
     String displayString() {
         return question + "; correct answer: " + correctAnswer + "; user answer: " + currentAnswer;
+    }
+
+    @Override
+    public String getQuestion() {
+        return null;
+    }
+
+    @Override
+    public String[] getOfferedAnswers() {
+        return new String[0];
+    }
+
+    @Override
+    public void setCurrentAnswers(int nextInt) {
+
     }
 
 }
