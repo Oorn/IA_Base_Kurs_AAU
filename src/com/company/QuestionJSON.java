@@ -33,12 +33,12 @@ public class QuestionJSON {
         String [] answers3 = {"1. Мадрид", "2. Каир", "3. Порто", "4. София"};
         String [] answers4 = {"1. Мадрид", "2. Каир", "3. Порто", "4. София"};
 
-        AbstractQuestion [] aq = new AbstractQuestion[5];
+        AbstractQuestion [] aq = new AbstractQuestion[12];
 
         QuestionJSON test = new QuestionJSON();
         test.singleQArray = new SingleChoiceQuestion[4];
-        test.textQArray = new TextQuestion[1];
-        test.multiQArray = new MultiChoiceQuestion[1];
+        test.textQArray = new TextQuestion[4];
+        test.multiQArray = new MultiChoiceQuestion[4];
 
 
 
@@ -50,11 +50,26 @@ public class QuestionJSON {
         test.singleQArray[2] = question3;
         SingleChoiceQuestion question4 = new SingleChoiceQuestion("Столица Болгарии?", answers4, 4);
         test.singleQArray[3] = question4;
-        TextQuestion question5 = new TextQuestion("textq1", "texta1", new TreeSet<>());
-        test.textQArray[0] = question5;
-        MultiChoiceQuestion question6 = new MultiChoiceQuestion("mq1", new String[] {"mqa1", "mqa2", "mqa3"}, new TreeSet<>(Arrays.asList(1,2)), new TreeSet<>());
-        test.multiQArray[0] = question6;
-
+//        TextQuestion question5 = new TextQuestion("textq1", "texta1", new TreeSet<>());
+//        test.textQArray[0] = question5;
+//        MultiChoiceQuestion question6 = new MultiChoiceQuestion("mq1", new String[] {"mqa1", "mqa2", "mqa3"}, new TreeSet<>(Arrays.asList(1,2)), new TreeSet<>());
+//        test.multiQArray[0] = question6;
+        MultiChoiceQuestion question5 = new MultiChoiceQuestion("Какие страны входят в Прибалтику?", new String[] {"1. Латвия", "2. Литва", "3. Эстония", "4. Рига"}, new TreeSet<>(Arrays.asList(1,2,3)), new TreeSet<>());
+        test.multiQArray[0] = question5;
+        MultiChoiceQuestion question6 = new MultiChoiceQuestion("Сколько рёбер у человека?", new String[] {"1. 24", "2. 12", "3. 18", "4. 12-пар"}, new TreeSet<>(Arrays.asList(1,4)), new TreeSet<>());
+        test.multiQArray[1] = question6;
+        MultiChoiceQuestion question7 = new MultiChoiceQuestion("Какое млекопитающее умеет летать?", new String[] {"1. Летучая мышь", "2. Белоголовый орлан", "3. Колуго", "4. Белка-летяга"}, new TreeSet<>(Arrays.asList(1,4)), new TreeSet<>());
+        test.multiQArray[2] = question7;
+        MultiChoiceQuestion question8 = new MultiChoiceQuestion("В каком направлении восходит солнце?", new String[] {"1. Север", "2. Юг", "3. Солнце остается на месте", "4. Восток"}, new TreeSet<>(Arrays.asList(3,4)), new TreeSet<>());
+        test.multiQArray[3] = question8;
+        TextQuestion question9 = new TextQuestion("Какого цвета нет в радуге?", "коричневого", new TreeSet<>());
+        test.textQArray[0] = question9;
+        TextQuestion question10 = new TextQuestion("Сколько республик входило в состав СССР?", "пятнадцать", new TreeSet<>());
+        test.textQArray[1] = question10;
+        TextQuestion question11 = new TextQuestion("Какое крупное парнокопытное животное обитает в Гренландии?", "овцебык", new TreeSet<>());
+        test.textQArray[2] = question11;
+        TextQuestion question12 = new TextQuestion("Какой город подарил свое название государственному гимну Французской республики?", "марсель", new TreeSet<>());
+        test.textQArray[3] = question12;
 
 //        SingleChoiceQuestion [] arraySCQ = {question, question2, question3, question4};
 
