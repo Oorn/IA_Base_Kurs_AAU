@@ -1,8 +1,16 @@
 package com.company;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.TreeSet;
 
 public class TextQuestion extends AbstractQuestion {
+    public TextQuestion() {
+        question = "";
+        correctAnswer = "";
+        tags = new TreeSet<>();
+        currentAnswer = "";
+    }
     TextQuestion(String question, String correctAnswer, TreeSet<String> tags) {
         this.question = question;
         this.correctAnswer = correctAnswer;
@@ -11,11 +19,12 @@ public class TextQuestion extends AbstractQuestion {
         //todo
     }
 
-    public TextQuestion() {
-    }
 
+    @JsonProperty
     String correctAnswer;
+    @JsonProperty
     String currentAnswer;
+    @JsonProperty
     String [] offeredAnswers;
 
     @Override
@@ -31,13 +40,13 @@ public class TextQuestion extends AbstractQuestion {
 
     @Override
     public String getQuestion() {
-        return null;
+        return question;
     }
 
-    @Override
-    public String[] getOfferedAnswers() {
-        return new String[0];
-    }
+    //@Override
+    //public String[] getOfferedAnswers() {
+    //    return new String[0];
+    //}
 
     @Override
     public void setCurrentAnswers(int nextInt) {

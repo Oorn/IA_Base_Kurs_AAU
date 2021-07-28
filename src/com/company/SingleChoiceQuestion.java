@@ -4,7 +4,7 @@ import java.util.Arrays;
 
 public class SingleChoiceQuestion extends AbstractQuestion {
 
-    String question;
+    //String question;
     String[] offeredAnswers;
     int correctAnswer;
     int currentAnswer;
