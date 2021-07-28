@@ -48,9 +48,9 @@ public class TextQuestion extends AbstractQuestion {
     //}
 
     //@Override
-    public void setCurrentAnswers(int nextInt) {
-
-    }
+    //public void setCurrentAnswers(int nextInt) {
+    //
+    //}
 
     @Override
     public String toString() {
