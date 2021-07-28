@@ -25,7 +25,8 @@ public abstract class AbstractQuestion {
 
     //public abstract String[] getOfferedAnswers();
 
-    public abstract void setCurrentAnswers(int nextInt);
+    //public abstract void setCurrentAnswers(int nextInt);
+
 }
 
 

@@ -4,6 +4,7 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import netscape.javascript.JSObject;
 
+import java.util.Arrays;
 import java.util.TreeSet;
 
 public class MultiChoiceQuestion extends AbstractQuestion {
@@ -25,10 +26,8 @@ public class MultiChoiceQuestion extends AbstractQuestion {
     @JsonProperty
     String[] offeredAnswers;
     @JsonProperty
-    @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property  = "Integer")
     TreeSet<Integer> correctAnswers;
     @JsonProperty
-    @JsonTypeInfo(use = JsonTypeInfo.Id.NAME, property  = "Integer")
     TreeSet<Integer> currentAnswers;
 
 
@@ -73,8 +72,19 @@ public class MultiChoiceQuestion extends AbstractQuestion {
     //    return new String[0];
     //}
 
-    @Override
-    public void setCurrentAnswers(int nextInt) {
+    //@Override
+    //public void setCurrentAnswers(int nextInt) {
+//
+  //  }
 
+    @Override
+    public String toString() {
+        return "MultiChoiceQuestion{" +
+                "question='" + question + '\'' +
+                ", tags=" + tags +
+                ", offeredAnswers=" + Arrays.toString(offeredAnswers) +
+                ", correctAnswers=" + correctAnswers +
+                ", currentAnswers=" + currentAnswers +
+                '}';
     }
 }

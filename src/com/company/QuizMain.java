@@ -27,7 +27,7 @@ public class QuizMain {
                 System.out.println(questions[i].getQuestion()); //вывод вопроса
                 //get breaks json? System.out.println(Arrays.toString(questions[i].getOfferedAnswers())); //вывод вариантов ответов
                 System.out.println("Ваш ответ: ");
-                questions[i].setCurrentAnswers(scanner.nextInt()); //присваиваем ответ
+                //questions[i].setCurrentAnswers(scanner.nextInt()); //присваиваем ответ
                 if (questions[i].ValidateAnswer()) { //сравниваем
                     score++; //начисляем балл, если true
                     System.out.println("Правильно!");

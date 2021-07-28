@@ -2,6 +2,7 @@ package com.company;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Arrays;
 import java.util.TreeSet;
 
 public class TextQuestion extends AbstractQuestion {
@@ -24,8 +25,6 @@ public class TextQuestion extends AbstractQuestion {
     String correctAnswer;
     @JsonProperty
     String currentAnswer;
-    @JsonProperty
-    String [] offeredAnswers;
 
     @Override
     Boolean ValidateAnswer() {
@@ -48,9 +47,18 @@ public class TextQuestion extends AbstractQuestion {
     //    return new String[0];
     //}
 
-    @Override
+    //@Override
     public void setCurrentAnswers(int nextInt) {
 
     }
 
+    @Override
+    public String toString() {
+        return "TextQuestion{" +
+                "question='" + question + '\'' +
+                ", tags=" + tags +
+                ", correctAnswer='" + correctAnswer + '\'' +
+                ", currentAnswer='" + currentAnswer + '\'' +
+                '}';
+    }
 }
