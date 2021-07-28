@@ -58,7 +58,7 @@ public class LeaderBoardDisplayCard extends UpperPanelCard{
         resultsTable.clearSelection();
         resultsTable.setModel(new DefaultTableModel( Arrays
                 .stream(state)
-                .map(TestResult::getTableEntry)
+                .map(TestResult::generateTableEntry)
                 .toArray(Object[][]::new) , columnNames) {
             @Override
             public boolean isCellEditable(int row, int column) {

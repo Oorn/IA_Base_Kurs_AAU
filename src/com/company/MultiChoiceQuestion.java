@@ -1,24 +1,49 @@
 package com.company;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 import java.util.TreeSet;
 
 public class MultiChoiceQuestion extends AbstractQuestion {
+    public MultiChoiceQuestion() {
+        question = "";
+        offeredAnswers = new String[0];
+        correctAnswers = new TreeSet<>();
+        tags = new TreeSet<>();
+        currentAnswers = new TreeSet<>();
+    }
+
     MultiChoiceQuestion(String question, String[] offeredAnswers, TreeSet<Integer> correctAnswers, TreeSet<String> tags){
         this.question = question;
         this.offeredAnswers = offeredAnswers;
         this.correctAnswers = correctAnswers;
         this.tags = tags;
         currentAnswers = new TreeSet<>();
-        //todo
     }
+    @JsonProperty
     String[] offeredAnswers;
+    @JsonProperty
     TreeSet<Integer> correctAnswers;
+    @JsonProperty
     TreeSet<Integer> currentAnswers;
 
     @Override
-    Boolean ValidateAnswer() {
-        //todo
-        return null;
+    Boolean validateAnswer() {
+        return (validateAnswerPartial() == 1.0f);
+    }
+
+    @Override
+    Float validateAnswerPartial() {
+        int matches = 0;
+        int mismatches = 0;
+        matches += (int) correctAnswers.stream().filter(c -> currentAnswers.contains(c)).count();
+        mismatches += (int) correctAnswers.stream().filter(c -> !currentAnswers.contains(c)).count();
+        mismatches += (int) currentAnswers.stream().filter(c -> !correctAnswers.contains(c)).count();
+        if (mismatches == 0)
+            return 1.0f;
+        if (matches >= mismatches)
+            return 0.5f;
+        return 0.0f;
     }
 
     @Override

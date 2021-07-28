@@ -42,6 +42,9 @@ public class GUIManager {
         //cannot callback more than once
         mainWindow.displayMultiQuestion(question, commitPress, cancelPress);
     }
+    void displaySingleChoiceQuestion(SingleChoiceQuestion question, Consumer<SingleChoiceQuestion> commitPress, Runnable cancelPress) {
+        mainWindow.displaySingleQuestion(question, commitPress, cancelPress);
+    }
     void displayHighScores(TestResult[] results, Consumer<TestResult> detailsPress, Runnable cancelPress) {
         //displays high score list of already sorted results array
         //detailsPress is offered TestResult selected by user, when Details button is pressed
@@ -61,6 +64,18 @@ public class GUIManager {
             displayTextQuestion((TextQuestion) question, (Consumer<TextQuestion>) commitPress, cancelPress);
         else if (question instanceof MultiChoiceQuestion)
             displayMultiChoiceQuestion((MultiChoiceQuestion) question, (Consumer<MultiChoiceQuestion>) commitPress, cancelPress);
+        else if (question instanceof SingleChoiceQuestion)
+            displaySingleChoiceQuestion((SingleChoiceQuestion) question, (Consumer<SingleChoiceQuestion>) commitPress, cancelPress);
+        else throw new ClassCastException("displayAbstractQuestion offered not supported object");
+    }
+    void displayAbstractQuestionTypeless(AbstractQuestion question, Runnable commitPress, Runnable cancelPress) {
+        //accepts abstract question without any questions, but result is not passed forward, but remains stored in question passed as argument
+        if (question instanceof TextQuestion)
+            displayTextQuestion((TextQuestion) question, (tq) -> commitPress.run(), cancelPress);
+        else if (question instanceof MultiChoiceQuestion)
+            displayMultiChoiceQuestion((MultiChoiceQuestion) question, (mq) -> commitPress.run(), cancelPress);
+        else if (question instanceof SingleChoiceQuestion)
+            displaySingleChoiceQuestion((SingleChoiceQuestion) question, (sq) -> commitPress.run(), cancelPress);
         else throw new ClassCastException("displayAbstractQuestion offered not supported object");
     }
     void close() {

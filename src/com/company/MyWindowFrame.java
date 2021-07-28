@@ -1,9 +1,14 @@
 package com.company;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.databind.SerializationFeature;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 import java.lang.reflect.Constructor;
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -22,11 +27,13 @@ public class MyWindowFrame extends JFrame {
     MultiChoiceQuestionCard multiChoiceQuestionPanel;
     LeaderBoardDisplayCard leaderBoardPanel;
     ResultsDetailedCard testResultPanel;
+    SingleChoiceQuestionCard singleChoiceQuestionPanel;
 
     private static final String BANNER_CARD = "Banner Card";
     //private static final String INPUT_NAME_CARD = "Input Name Card";
     private static final String TEXT_QUESTION_CARD = "Text Question Card";
     private static final String MULTI_QUESTION_CARD = "Multi Question Card";
+    private static final String SINGLE_QUESTION_CARD = "Single Question Card";
     private static final String LEADERBOARD_CARD = "Leaderboard Card";
     private static final String RESULTS_DETAILED_CARD = "Test Result Card";
 
@@ -115,6 +122,10 @@ public class MyWindowFrame extends JFrame {
         testResultPanel = new ResultsDetailedCard(RESULTS_DETAILED_CARD, this);
         testResultPanel.init();
         upperPanel.add(testResultPanel, RESULTS_DETAILED_CARD);
+
+        singleChoiceQuestionPanel = new SingleChoiceQuestionCard(SINGLE_QUESTION_CARD, this);
+        singleChoiceQuestionPanel.init();
+        upperPanel.add(singleChoiceQuestionPanel, SINGLE_QUESTION_CARD);
     }
     private void displayCard(String Card) {
         ((CardLayout)(upperPanel.getLayout())).show(upperPanel, Card);
@@ -173,6 +184,34 @@ public class MyWindowFrame extends JFrame {
             isBlocked = true;
             textQuestionPanel.writeToState();
             commitPress.accept(textQuestionPanel.getState());
+        });
+
+        cancelButton.addActionListener((e) -> {
+            if (isBlocked)
+                return;
+            isBlocked = true;
+            cancelPress.run();
+        });
+
+        unblock();
+    }
+    public void displaySingleQuestion(SingleChoiceQuestion question, Consumer<SingleChoiceQuestion> commitPress, Runnable cancelPress) {
+        destroyButtonListeners();
+        okButton.setVisible(true);
+        cancelButton.setVisible(true);
+        okButton.setText("Ok");
+        cancelButton.setText("Cancel");
+
+        singleChoiceQuestionPanel.setState(question);
+        singleChoiceQuestionPanel.updateFromState();
+        displayCard(SINGLE_QUESTION_CARD);
+
+        okButton.addActionListener((e) -> {
+            if (isBlocked)
+                return;
+            isBlocked = true;
+            singleChoiceQuestionPanel.writeToState();
+            commitPress.accept(singleChoiceQuestionPanel.getState());
         });
 
         cancelButton.addActionListener((e) -> {
@@ -303,7 +342,7 @@ public class MyWindowFrame extends JFrame {
                 closeTest);
 
 
-        test.displayHighScores(testRes, testBase.highScoresOkTest, closeTest);
+        //test.displayHighScores(testRes, testBase.highScoresOkTest, closeTest);
 
         AbstractQuestion[] testQuiz = new AbstractQuestion[7];
         TextQuestion tq;
@@ -331,10 +370,27 @@ public class MyWindowFrame extends JFrame {
         mq.currentAnswers = new TreeSet<>(Arrays.asList(1,2));
         testQuiz[6] = mq;
 
-        //test.displayTestResult(new TestResult("test name", 10, "test commentaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", testQuiz), testBase.closeTest);
+        TestResult tr1 = null, tr2 = new TestResult("test name", 10, "test commentaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", testQuiz);
+        ObjectMapper jsonMapper = new ObjectMapper();
+        jsonMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
+        File file = new File("test.json");
 
+        try {
+            jsonMapper.writeValue(file, tr2);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        try {
+            tr1 = jsonMapper.readValue(file, TestResult.class);
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
 
+        test.displayTestResult(tr1, testBase.closeTest);
 
-
+        SingleChoiceQuestion sq = new SingleChoiceQuestion("single question", new String[] {"answer1", "answer2"}, 0, null);
+        SingleChoiceQuestion sq2 = new SingleChoiceQuestion("single question2", new String[] {"answer1", "answer2", "answer3"}, 1, null);
+        //test.displayAbstractQuestionTypeless(sq, () -> { System.out.println(sq.displayString()); test.close(); },
+        //        () -> test.displayAbstractQuestionTypeless(sq2, () -> { System.out.println(sq2.displayString()); test.close(); } , test::close));
     }
 }
