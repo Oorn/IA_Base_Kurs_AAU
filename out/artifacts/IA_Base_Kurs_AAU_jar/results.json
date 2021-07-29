@@ -1,0 +1,217 @@
+[ {
+  "name" : "Автор",
+  "score" : 100,
+  "comment" : "Test time = 74 seconds",
+  "questionsAndAnswers" : [ {
+    "questionType" : "com.company.SingleChoiceQuestion",
+    "question" : "Какой из этих городов столица Канады?",
+    "tags" : [ ],
+    "offeredAnswers" : [ "Атланта", "Калгари", "Оттава", "Торонто", "Монреаль" ],
+    "correctAnswer" : 2,
+    "currentAnswer" : 2
+  }, {
+    "questionType" : "com.company.TextQuestion",
+    "question" : "Какая страна в мире имеет больше всего полицейских на душу населения?",
+    "tags" : [ ],
+    "correctAnswer" : "Ватикан",
+    "currentAnswer" : "Ватикан"
+  }, {
+    "questionType" : "com.company.SingleChoiceQuestion",
+    "question" : "Какая их этих стран НЕ имеет города, входящего в десятку самых населенных городов мира?",
+    "tags" : [ ],
+    "offeredAnswers" : [ "Мексика", "США", "Япония", "Бразилия", "Индия" ],
+    "correctAnswer" : 1,
+    "currentAnswer" : 1
+  }, {
+    "questionType" : "com.company.TextQuestion",
+    "question" : "Назовите континент на котором находиться большего всего стран",
+    "tags" : [ ],
+    "correctAnswer" : "Африка",
+    "currentAnswer" : "Африка"
+  }, {
+    "questionType" : "com.company.MultiChoiceQuestion",
+    "question" : "Какие из перечисленых стран граничат с 3 океанами?",
+    "tags" : [ ],
+    "offeredAnswers" : [ "США", "Япония", "ЮАР", "Канада", "Россия" ],
+    "correctAnswers" : [ 3, 4 ],
+    "currentAnswers" : [ 3, 4 ]
+  }, {
+    "questionType" : "com.company.SingleChoiceQuestion",
+    "question" : "Какой из этих островов разделен между наибольшим колличеством стран?",
+    "tags" : [ ],
+    "offeredAnswers" : [ "Новая Гвинея", "Борнео/Калимантан", "Кипр", "Ирландия" ],
+    "correctAnswer" : 1,
+    "currentAnswer" : 1
+  }, {
+    "questionType" : "com.company.MultiChoiceQuestion",
+    "question" : "Какие из перечисленых стран больше не являются суверенными государствами?",
+    "tags" : [ ],
+    "offeredAnswers" : [ "Мальта", "Остров Святой Елены", "Македония", "Англия", "Бенгалия", "Родезия" ],
+    "correctAnswers" : [ 3, 4, 5 ],
+    "currentAnswers" : [ 3, 4, 5 ]
+  }, {
+    "questionType" : "com.company.MultiChoiceQuestion",
+    "question" : "Какие из перечисленых стран находятся в Азии?",
+    "tags" : [ ],
+    "offeredAnswers" : [ "Ливан", "Перу", "Бахрейн", "Боливия", "Лаос", "Эквадор", "Парагвай" ],
+    "correctAnswers" : [ 0, 2, 4 ],
+    "currentAnswers" : [ 0, 2, 4 ]
+  }, {
+    "questionType" : "com.company.TextQuestion",
+    "question" : "Всего 2 столицы в мире находятся ниже уровня моря. Амстердам одна из них, назовите вторую",
+    "tags" : [ ],
+    "correctAnswer" : "Баку",
+    "currentAnswer" : "Баку"
+  }, {
+    "questionType" : "com.company.SingleChoiceQuestion",
+    "question" : "Какая из этих стран имеет наименьшее население?",
+    "tags" : [ ],
+    "offeredAnswers" : [ "Сан Марино", "Монако", "Тувалу", "Лихтенштейн", "Ватикан" ],
+    "correctAnswer" : 4,
+    "currentAnswer" : 4
+  } ]
+}, {
+  "name" : "Лорд",
+  "score" : 55,
+  "comment" : "Test time = 191 seconds",
+  "questionsAndAnswers" : [ {
+    "questionType" : "com.company.SingleChoiceQuestion",
+    "question" : "Какая из этих стран имеет наименьшее население?",
+    "tags" : [ ],
+    "offeredAnswers" : [ "Сан Марино", "Монако", "Тувалу", "Лихтенштейн", "Ватикан" ],
+    "correctAnswer" : 4,
+    "currentAnswer" : 0
+  }, {
+    "questionType" : "com.company.TextQuestion",
+    "question" : "Назовите страну, в которой находится самый южный город в мире",
+    "tags" : [ ],
+    "correctAnswer" : "Чили",
+    "currentAnswer" : "Аргентина"
+  }, {
+    "questionType" : "com.company.SingleChoiceQuestion",
+    "question" : "Какой из этих городов столица Канады?",
+    "tags" : [ ],
+    "offeredAnswers" : [ "Атланта", "Калгари", "Оттава", "Торонто", "Монреаль" ],
+    "correctAnswer" : 2,
+    "currentAnswer" : 4
+  }, {
+    "questionType" : "com.company.TextQuestion",
+    "question" : "Назовите столицу Бразилии",
+    "tags" : [ ],
+    "correctAnswer" : "Бразилиа",
+    "currentAnswer" : "Бразилиа"
+  }, {
+    "questionType" : "com.company.MultiChoiceQuestion",
+    "question" : "Какие из перечисленых стран Европы НЕ имеют доступа к морю?",
+    "tags" : [ ],
+    "offeredAnswers" : [ "Сербия", "Польша", "Австрия", "Армения", "Словения" ],
+    "correctAnswers" : [ 0, 2, 3 ],
+    "currentAnswers" : [ 0, 2 ]
+  }, {
+    "questionType" : "com.company.MultiChoiceQuestion",
+    "question" : "Какие из перечисленых стран находятся в Азии?",
+    "tags" : [ ],
+    "offeredAnswers" : [ "Ливан", "Перу", "Бахрейн", "Боливия", "Лаос", "Эквадор", "Парагвай" ],
+    "correctAnswers" : [ 0, 2, 4 ],
+    "currentAnswers" : [ 0, 2, 4 ]
+  }, {
+    "questionType" : "com.company.SingleChoiceQuestion",
+    "question" : "Какой из этих островов имеет наибольшую территорию?",
+    "tags" : [ ],
+    "offeredAnswers" : [ "Великобритания", "Хонсю", "Новая Гвинея", "Мадагаскар", "Суматра" ],
+    "correctAnswer" : 2,
+    "currentAnswer" : 2
+  }, {
+    "questionType" : "com.company.SingleChoiceQuestion",
+    "question" : "Какая из этих рек является самой полноводной?",
+    "tags" : [ ],
+    "offeredAnswers" : [ "Нил", "Амазонка", "Конго", "Ганг", "Дунай" ],
+    "correctAnswer" : 1,
+    "currentAnswer" : 1
+  }, {
+    "questionType" : "com.company.TextQuestion",
+    "question" : "Назовите континент на котором находиться большего всего стран",
+    "tags" : [ ],
+    "correctAnswer" : "Африка",
+    "currentAnswer" : "Африка"
+  }, {
+    "questionType" : "com.company.SingleChoiceQuestion",
+    "question" : "Какая их этих стран НЕ имеет города, входящего в десятку самых населенных городов мира?",
+    "tags" : [ ],
+    "offeredAnswers" : [ "Мексика", "США", "Япония", "Бразилия", "Индия" ],
+    "correctAnswer" : 1,
+    "currentAnswer" : 3
+  } ]
+}, {
+  "name" : "Sv",
+  "score" : 25,
+  "comment" : "Test time = 245 seconds",
+  "questionsAndAnswers" : [ {
+    "questionType" : "com.company.TextQuestion",
+    "question" : "Какая страна в мире имеет больше всего полицейских на душу населения?",
+    "tags" : [ ],
+    "correctAnswer" : "Ватикан",
+    "currentAnswer" : "США"
+  }, {
+    "questionType" : "com.company.MultiChoiceQuestion",
+    "question" : "Какие из перечисленых стран граничат с 3 океанами?",
+    "tags" : [ ],
+    "offeredAnswers" : [ "США", "Япония", "ЮАР", "Канада", "Россия" ],
+    "correctAnswers" : [ 3, 4 ],
+    "currentAnswers" : [ 0, 1 ]
+  }, {
+    "questionType" : "com.company.TextQuestion",
+    "question" : "Назовите страну, в которой находится самый южный город в мире",
+    "tags" : [ ],
+    "correctAnswer" : "Чили",
+    "currentAnswer" : "Австралия"
+  }, {
+    "questionType" : "com.company.MultiChoiceQuestion",
+    "question" : "Какие из перечисленых стран Европы НЕ имеют доступа к морю?",
+    "tags" : [ ],
+    "offeredAnswers" : [ "Сербия", "Польша", "Австрия", "Армения", "Словения" ],
+    "correctAnswers" : [ 0, 2, 3 ],
+    "currentAnswers" : [ 0, 2, 3, 4 ]
+  }, {
+    "questionType" : "com.company.MultiChoiceQuestion",
+    "question" : "Какие из перечисленых стран находятся в Азии?",
+    "tags" : [ ],
+    "offeredAnswers" : [ "Ливан", "Перу", "Бахрейн", "Боливия", "Лаос", "Эквадор", "Парагвай" ],
+    "correctAnswers" : [ 0, 2, 4 ],
+    "currentAnswers" : [ 0, 4 ]
+  }, {
+    "questionType" : "com.company.MultiChoiceQuestion",
+    "question" : "Какие из перечисленых стран находятся в Африке?",
+    "tags" : [ ],
+    "offeredAnswers" : [ "Ливия", "Парагвай", "Сирия", "Боливия", "Ботсвана" ],
+    "correctAnswers" : [ 0, 4 ],
+    "currentAnswers" : [ 4 ]
+  }, {
+    "questionType" : "com.company.SingleChoiceQuestion",
+    "question" : "Какой из этих городов столица Канады?",
+    "tags" : [ ],
+    "offeredAnswers" : [ "Атланта", "Калгари", "Оттава", "Торонто", "Монреаль" ],
+    "correctAnswer" : 2,
+    "currentAnswer" : 4
+  }, {
+    "questionType" : "com.company.SingleChoiceQuestion",
+    "question" : "Какая из этих рек является самой полноводной?",
+    "tags" : [ ],
+    "offeredAnswers" : [ "Нил", "Амазонка", "Конго", "Ганг", "Дунай" ],
+    "correctAnswer" : 1,
+    "currentAnswer" : 1
+  }, {
+    "questionType" : "com.company.TextQuestion",
+    "question" : "Всего 2 столицы в мире находятся ниже уровня моря. Амстердам одна из них, назовите вторую",
+    "tags" : [ ],
+    "correctAnswer" : "Баку",
+    "currentAnswer" : "Лима"
+  }, {
+    "questionType" : "com.company.SingleChoiceQuestion",
+    "question" : "Какая из этих стран имеет наименьшее население?",
+    "tags" : [ ],
+    "offeredAnswers" : [ "Сан Марино", "Монако", "Тувалу", "Лихтенштейн", "Ватикан" ],
+    "correctAnswer" : 4,
+    "currentAnswer" : 0
+  } ]
+} ]

@@ -89,11 +89,11 @@ public class SimpleTest extends AbstractTest{
         double relativeScoreFinal = 0.0d;
         for (int i = 0; i < questionNumber; i++)
             relativeScoreFinal += relativeScoreAtom * questions[i].validateAnswerPartial();
-        int finalScore = (int) (MAX_SCORE * relativeScoreFinal);
+        int finalScore = (int) Math.round (MAX_SCORE * relativeScoreFinal);
 
         String comment;
         if (isStarted && isComplete)
-            comment = "Test time = " + ((finishTime - startTime) / 1000) + "seconds";
+            comment = "Test time = " + ((finishTime - startTime) / 1000) + " seconds";
         else
             comment = "Test not timed";
 
