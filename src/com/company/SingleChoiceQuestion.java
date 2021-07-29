@@ -2,6 +2,7 @@ package com.company;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Arrays;
 import java.util.TreeSet;
 
 public class SingleChoiceQuestion extends AbstractQuestion{
@@ -27,19 +28,39 @@ public class SingleChoiceQuestion extends AbstractQuestion{
     @JsonProperty
     Integer currentAnswer;
     @Override
-    Boolean validateAnswer() {
+    public Boolean validateAnswer() {
         return (currentAnswer == correctAnswer);
     }
 
     @Override
-    Float validateAnswerPartial() {
+    public Float validateAnswerPartial() {
         if (validateAnswer())
             return 1.0f;
         return 0.0f;
     }
 
     @Override
-    String displayString() {
+    public String displayString() {
         return question + "; correct answer: " + offeredAnswers[correctAnswer] + "; user answer: " + offeredAnswers[currentAnswer];
+    }
+
+    @Override
+    public AbstractQuestion copy() {
+        SingleChoiceQuestion copy = new SingleChoiceQuestion();
+        if (question != null)
+            copy.question = question;
+        if (tags != null)
+            copy.tags.addAll(tags);
+
+        if (offeredAnswers != null)
+            copy.offeredAnswers = Arrays.copyOf(offeredAnswers, offeredAnswers.length);
+
+        if (correctAnswer != null)
+            copy.correctAnswer = correctAnswer;
+
+        if (currentAnswer != null)
+            copy.currentAnswer = currentAnswer;
+
+        return copy;
     }
 }

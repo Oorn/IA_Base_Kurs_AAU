@@ -2,6 +2,7 @@ package com.company;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.Arrays;
 import java.util.TreeSet;
 
 public class MultiChoiceQuestion extends AbstractQuestion {
@@ -28,12 +29,12 @@ public class MultiChoiceQuestion extends AbstractQuestion {
     TreeSet<Integer> currentAnswers;
 
     @Override
-    Boolean validateAnswer() {
+    public Boolean validateAnswer() {
         return (validateAnswerPartial() == 1.0f);
     }
 
     @Override
-    Float validateAnswerPartial() {
+    public Float validateAnswerPartial() {
         int matches = 0;
         int mismatches = 0;
         matches += (int) correctAnswers.stream().filter(c -> currentAnswers.contains(c)).count();
@@ -47,7 +48,7 @@ public class MultiChoiceQuestion extends AbstractQuestion {
     }
 
     @Override
-    String displayString() {
+    public String displayString() {
         StringBuilder res = new StringBuilder(question);
 
         res.append("; correct answers: ");
@@ -69,5 +70,26 @@ public class MultiChoiceQuestion extends AbstractQuestion {
         res.delete(res.length() - 2, res.length());
 
         return res.toString();
+    }
+
+    @Override
+    public AbstractQuestion copy() {
+        MultiChoiceQuestion copy = new MultiChoiceQuestion();
+        if (question != null)
+            copy.question = question;
+
+        if (tags != null)
+            copy.tags.addAll(tags);
+
+        if (offeredAnswers != null)
+            copy.offeredAnswers = Arrays.copyOf(offeredAnswers, offeredAnswers.length);
+
+        if (correctAnswers != null)
+            copy.correctAnswers.addAll(correctAnswers);
+
+        if (currentAnswers != null)
+            copy.currentAnswers.addAll(currentAnswers);
+
+        return copy;
     }
 }

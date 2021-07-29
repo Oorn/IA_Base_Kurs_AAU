@@ -20,8 +20,9 @@ public abstract class AbstractQuestion {
     @JsonProperty
     TreeSet<String> tags;
 
-    abstract Boolean validateAnswer();
-    abstract Float validateAnswerPartial();
-    abstract String displayString();
+    public abstract Boolean validateAnswer();
+    public abstract Float validateAnswerPartial();
+    public abstract String displayString();
+    public abstract AbstractQuestion copy();
 
 }

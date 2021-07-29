@@ -2,7 +2,7 @@ package com.company;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class TestResult {
+public class TestResult implements Comparable<TestResult>{
     @JsonProperty
     String name;
     @JsonProperty
@@ -31,5 +31,12 @@ public class TestResult {
         res[1] = score;
         res[2] = comment;
         return res;
+    }
+
+    @Override
+    public int compareTo(TestResult o) {
+        if (o.score - score != 0)
+            return o.score - score;
+        return name.compareTo(o.name);
     }
 }

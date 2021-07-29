@@ -63,15 +63,13 @@ public class ResultsDetailedCard extends UpperPanelCard{
         isUpToDate = false;
 
         questionList.addListSelectionListener((e) -> {
-            /*if (e.getFirstIndex() < 1)
+            if (e.getValueIsAdjusting())
                 return;
-            if (e.getFirstIndex() >= state.questionsAndAnswers.length)
+            if (questionList.getSelectedIndex() < 0)
                 return;
-            footer.setText(state.questionsAndAnswers[e.getFirstIndex() - 1].displayString());*/
-            if (!e.getValueIsAdjusting())
-                footer.setText(state.questionsAndAnswers[
-                        questionList.getSelectedIndex()]
-                        .displayString());
+            footer.setText(state.questionsAndAnswers[
+                    questionList.getSelectedIndex()]
+                    .displayString());
         });
 
     }
@@ -89,6 +87,7 @@ public class ResultsDetailedCard extends UpperPanelCard{
         footer.setText("");
 
         questionList.clearSelection();
+
         listModel.clear();
         Arrays.stream(state.questionsAndAnswers).forEach((q)-> listModel.addElement(q.question));
 
