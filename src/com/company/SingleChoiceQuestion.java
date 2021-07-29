@@ -41,7 +41,7 @@ public class SingleChoiceQuestion extends AbstractQuestion{
 
     @Override
     public String displayString() {
-        return question + "; correct answer: " + offeredAnswers[correctAnswer] + "; user answer: " + offeredAnswers[currentAnswer];
+        return question + "\ncorrect answer: " + offeredAnswers[correctAnswer] + "\nuser answer: " + offeredAnswers[currentAnswer];
     }
 
     @Override

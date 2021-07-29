@@ -16,7 +16,7 @@ public class QuizGameMain {
 
 
 
-    int questionCount = 3;
+    int questionCount = 10;
     AbstractQuestion[] potentialQuestions;
     ArrayList<TestResult> resultsList;
     AbstractTest currentTest;

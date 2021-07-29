@@ -51,23 +51,25 @@ public class MultiChoiceQuestion extends AbstractQuestion {
     public String displayString() {
         StringBuilder res = new StringBuilder(question);
 
-        res.append("; correct answers: ");
+        res.append("\ncorrect answers: [");
         correctAnswers.forEach((i) -> {
             res.append(offeredAnswers[i]);
             res.append(", ");
         });
+        res.append(']');
         if (correctAnswers.isEmpty())
-            res.append("none, ");
-        res.delete(res.length() - 2, res.length());
+            res.append(", ");
+        res.delete(res.length() - 3, res.length() - 1);
 
-        res.append("; user answers: ");
+        res.append("\nuser answers: [");
         currentAnswers.forEach((i) -> {
             res.append(offeredAnswers[i]);
             res.append(", ");
         });
+        res.append(']');
         if (currentAnswers.isEmpty())
-            res.append("none, ");
-        res.delete(res.length() - 2, res.length());
+            res.append(", ");
+        res.delete(res.length() - 3, res.length() - 1);
 
         return res.toString();
     }

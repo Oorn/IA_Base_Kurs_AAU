@@ -50,7 +50,7 @@ public class MyWindowFrame extends JFrame {
         initLowerPanelButtons();
         initUpperPanelCards();
 
-        setVisible(true);
+
         isBlocked = true;
 
     }
@@ -160,6 +160,7 @@ public class MyWindowFrame extends JFrame {
             isBlocked = true;
             newGamePress.run();
         });
+        setVisible(true);
         unblock();
     }
     public void displayInputName(Consumer<String> okPress, Runnable cancelPress) {
@@ -193,6 +194,7 @@ public class MyWindowFrame extends JFrame {
             cancelPress.run();
         });
 
+        setVisible(true);
         unblock();
     }
     public void displaySingleQuestion(SingleChoiceQuestion question, Consumer<SingleChoiceQuestion> commitPress, Runnable cancelPress) {
@@ -221,6 +223,7 @@ public class MyWindowFrame extends JFrame {
             cancelPress.run();
         });
 
+        setVisible(true);
         unblock();
     }
     public void displayMultiQuestion(MultiChoiceQuestion question, Consumer<MultiChoiceQuestion> commitPress, Runnable cancelPress) {
@@ -249,6 +252,7 @@ public class MyWindowFrame extends JFrame {
             cancelPress.run();
         });
 
+        setVisible(true);
         unblock();
     }
     public void displayHighScores(TestResult[] results, Consumer<TestResult> detailsPress, Runnable cancelPress) {
@@ -282,6 +286,7 @@ public class MyWindowFrame extends JFrame {
             cancelPress.run();
         });
 
+        setVisible(true);
         unblock();
     }
     void displayTestResult(TestResult result, Runnable backPress) {
@@ -300,97 +305,7 @@ public class MyWindowFrame extends JFrame {
             isBlocked = true;
             backPress.run();
         });
+        setVisible(true);
         unblock();
-    }
-
-
-
-    public static void main(String[] args) {
-        // testing of GUI
-        GUIManager test = new GUIManager();
-        test.initialize();
-        //test.displayMainMenu(() -> test.displayInputName((s) -> test.displayTextQuestion(new TextQuestion(s, "", null), (tq) -> test.displayMultiChoiceQuestion(new MultiChoiceQuestion(tq.currentAnswer, new String[]{"Answer1", "Answer2"}, new TreeSet<>(), null), (mcq) -> test.close(), test::close), test::close), test::close), test::close);
-        TestResult[] testRes = new TestResult[7];
-        TestResult[] testRes2 = new TestResult[2];
-        testRes[0] = new TestResult("name1", 1, "comment1", null);
-        testRes[1] = new TestResult("name2", 2, "comment2", null);
-        testRes[2] = new TestResult("name3", 3, "comment3", null);
-        testRes[3] = new TestResult("name4", 4, "comment4", null);
-        testRes[4] = new TestResult("name5", 5, "comment5", null);
-        testRes[5] = new TestResult("name6", 6, "comment6", null);
-        testRes[6] = new TestResult("name7", 7, "comment7", null);
-
-        testRes2[0] = new TestResult("name1", 1, "comment1", null);
-        testRes2[1] = new TestResult("name2", 2, "comment2", null);
-
-        class testFunctionBase {
-            Runnable closeTest = test::close;
-            Consumer<TextQuestion> textQuestionOkTest;
-            Consumer<TestResult> highScoresOkTest;
-        }
-        testFunctionBase testBase = new testFunctionBase();
-
-        Runnable closeTest = test::close;
-        Consumer<TextQuestion> textQuestionOkTest;
-        testBase.highScoresOkTest = (tRes) -> test.displayTextQuestion(
-                        new TextQuestion(tRes.name, "", null),
-                        testBase.textQuestionOkTest,
-                        closeTest);
-        testBase.textQuestionOkTest = (tRes) -> test.displayHighScores(
-                testRes2,
-                testBase.highScoresOkTest,
-                closeTest);
-
-
-        //test.displayHighScores(testRes, testBase.highScoresOkTest, closeTest);
-
-        AbstractQuestion[] testQuiz = new AbstractQuestion[7];
-        TextQuestion tq;
-        MultiChoiceQuestion mq;
-        tq = new TextQuestion("text question 1" , "correct answer 1", null);
-        tq.currentAnswer = "user answer 1";
-        testQuiz[0] = tq;
-        tq = new TextQuestion("text question 2" , "correct answer 2", null);
-        tq.currentAnswer = "user answer 2";
-        testQuiz[1] = tq;
-        tq = new TextQuestion("text question 3" , "correct answer 3", null);
-        tq.currentAnswer = "user answer 3";
-        testQuiz[2] = tq;
-        tq = new TextQuestion("text question 4" , "correct answer 4", null);
-        tq.currentAnswer = "user answer 4";
-        testQuiz[3] = tq;
-        tq = new TextQuestion("text question 5" , "correct answer 5", null);
-        tq.currentAnswer = "user answer 5";
-        testQuiz[4] = tq;
-
-        mq = new MultiChoiceQuestion("multi question 6", new String[] {"multi answer 1", "multi answer 2", "multi answer 3"}, new TreeSet<>(Arrays.asList(0,2)), null);
-        mq.currentAnswers = new TreeSet<>(Arrays.asList(0,1));
-        testQuiz[5] = mq;
-        mq = new MultiChoiceQuestion("multi question 7", new String[] {"multi answer 1", "multi answer 2", "multi answer 3"}, new TreeSet<>(Arrays.asList(1,2)), null);
-        mq.currentAnswers = new TreeSet<>(Arrays.asList(1,2));
-        testQuiz[6] = mq;
-
-        TestResult tr1 = null, tr2 = new TestResult("test name", 10, "test commentaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa", testQuiz);
-        ObjectMapper jsonMapper = new ObjectMapper();
-        jsonMapper.configure(SerializationFeature.INDENT_OUTPUT, true);
-        File file = new File("test.json");
-
-        try {
-            jsonMapper.writeValue(file, tr2);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-        try {
-            tr1 = jsonMapper.readValue(file, TestResult.class);
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
-        test.displayTestResult(tr1, testBase.closeTest);
-
-        SingleChoiceQuestion sq = new SingleChoiceQuestion("single question", new String[] {"answer1", "answer2"}, 0, null);
-        SingleChoiceQuestion sq2 = new SingleChoiceQuestion("single question2", new String[] {"answer1", "answer2", "answer3"}, 1, null);
-        //test.displayAbstractQuestionTypeless(sq, () -> { System.out.println(sq.displayString()); test.close(); },
-        //        () -> test.displayAbstractQuestionTypeless(sq2, () -> { System.out.println(sq2.displayString()); test.close(); } , test::close));
     }
 }

@@ -37,7 +37,7 @@ public class TextQuestion extends AbstractQuestion {
 
     @Override
     public String displayString() {
-        return question + "; correct answer: " + correctAnswer + "; user answer: " + currentAnswer;
+        return question + "\ncorrect answer: " + correctAnswer + "\nuser answer: " + currentAnswer;
     }
 
     @Override

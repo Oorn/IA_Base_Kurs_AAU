@@ -83,7 +83,7 @@ public class ResultsDetailedCard extends UpperPanelCard{
         if (isUpToDate)
             return;
 
-        header.setText("Name: " + state.name + " Score: " + state.score + " Comment: " + state.comment);
+        header.setText("Name: " + state.name + "\nScore: " + state.score + "\nComment: " + state.comment);
         footer.setText("");
 
         questionList.clearSelection();
